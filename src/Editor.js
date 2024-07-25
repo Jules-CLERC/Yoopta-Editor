@@ -14,9 +14,9 @@ import VideoPlugin from '@yoopta/video';
 import { BulletedList, NumberedList, TodoList } from '@yoopta/lists';
 import { HeadingOne, HeadingTwo, HeadingThree } from '@yoopta/headings';
 
-import ActionMenuList from '@yoopta/action-menu-list';
-import Toolbar from '@yoopta/toolbar';
-import LinkTool from '@yoopta/link-tool';
+import LinkTool, { DefaultLinkToolRender } from '@yoopta/link-tool';
+import ActionMenu, { DefaultActionMenuRender } from '@yoopta/action-menu-list';
+import Toolbar, { DefaultToolbarRender } from '@yoopta/toolbar';
 
 import { Bold, Italic, CodeMark, Underline, Strike, Highlight } from '@yoopta/marks';
 
@@ -39,11 +39,20 @@ const plugins = [
     HeadingThree
 ];
 
-const tools = [
-    ActionMenuList,
-    Toolbar,
-    LinkTool
-];
+const tools = {
+    Toolbar: {
+      tool: Toolbar,
+      render: DefaultToolbarRender,
+    },
+    ActionMenu: {
+      tool: ActionMenu,
+      render: DefaultActionMenuRender,
+    },
+    LinkTool: {
+      tool: LinkTool,
+      render: DefaultLinkToolRender,
+    },
+  };
 
 const marks = [
     Bold,
@@ -62,6 +71,7 @@ export default function Editor() {
             <YooptaEditor
                 editor={editor}
                 plugins={plugins}
+                placeholder="Type text.."
                 tools={tools}
                 marks={marks}
             />
